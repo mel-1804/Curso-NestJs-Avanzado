@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Inject } from '@nestjs/common';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from './auth.guard';
-import { ClientProxy, Inject } from '@nestjs/microservices';
+import { Authguard } from './auth.guard';
+import { ClientProxy } from '@nestjs/microservices';
 import { NATS_SERVICE } from '../config/services';
 
 @Controller('auth')
@@ -19,7 +19,7 @@ export class AuthController {
     return loginUserDto;
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(Authguard)
   @Get()
   verify() {
     return '...verifing';
